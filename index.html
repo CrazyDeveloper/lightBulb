@@ -1,0 +1,36 @@
+<!DOTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+        <script type="text/javascript" src="lightBolb.js"></script>
+        <style>
+        #main {
+            width:750px;
+            height: 750px;
+            outline:1px solid dotted;
+        }
+        #main ul {
+            width:inherit;
+            height:inherit;
+        }
+        #main ul li img {
+            width:128px;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <ul id="lightBolb">
+                <li>
+                    <img src="http://2.bp.blogspot.com/_E9eUh_Zsz10/TJuJMR3H-9I/AAAAAAAAATs/eoEabFS6WFA/s1600/Manchester_United_6.jpg" alt="">
+                </li>
+                <li>
+                    <img src="http://2.bp.blogspot.com/_E9eUh_Zsz10/TJuJMR3H-9I/AAAAAAAAATs/eoEabFS6WFA/s1600/Manchester_United_6.jpg" alt="">
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            $("#lightBolb").lightBolb();
+        </script>
+    </body>
+</html>
