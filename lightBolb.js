@@ -1,4 +1,12 @@
-// ; Put in case that some other function is not closed propprly
+// TODO  * If image that has been clicked is already loaded do not call event
+// TODO  * Check if image is valid and source can be accessed
+// TODO  * Need to clear Q when clicking on new images(prevent abuse)
+// TODO  * Add close button
+// TODO  * Add close upon clicking anywhere else except the image, or image holder
+// TODO  * Multiple images functionality
+
+
+// ; Put in case that some other function is not closed properly
 ;(function ($) {
 
 	// Constructor
@@ -23,7 +31,7 @@
 		// Don't want to get messed up with other JS or jQ
 		var publicMethodes = {
 			checkImgSize : function (orWidth, orHeight, width, height) {
-				if ( (orWidth===width) || (orHeight===height) ) {
+				if ( (orWidth === width) || (orHeight === height) ) {
 					return false;
 				}
 			},
@@ -31,44 +39,43 @@
                 // Perform animation for lightBulb holder
                 // Get current img values and values of wrapper for animate
                 // Call .animate(), upon complete append image :-)
+
                 $(el.jQWrap).html("<img id='loader' src='ajax-loader.gif'/>");
                 var lightBulbWidth  = $(el.jQWrap).width();
                 var lightBulbHeight = $(el.jQWrap).height();
-                if( (lightBulbHeight===0) || (lightBulbWidth===0)){
-                    $(el.jQWrap).css({"width":"150px", "height":"150px"});
-                    setTimeout(function(){
-                        $(el.jQWrap).animate({
-                            width : w+60,
-                            height: h+60
-                        },1500, function() {
-                            $(el.jQWrap).html(e);
-                        });
-                    }, 1500);
-                }
                  $(el.jQWrap).animate({
                     width : w+60,
                     height: h+60
-                    },1500, function() {
+                    },100, function() {
                         $(el.jQWrap).html(e);
                     });
 			},
-			//Main initil
+			//Main init
 			init : function() {
 				// Append container for images position it abslute and keep it hidden
-				$("body").append("<div id='"+el.holder+"'></div>");
-				//Get values for css
-				$("#"+el.holder).css({ 'max-width'      : params.holderWidth,
-									   'max-height'     : params.holderHeight,
-								   	   'background' : params.background,
-								   	   'position'   : 'absolute', 
-								   	   'top'        : '150px',
-								   	   'left' 	    : '150px',
-								       'z-index'    : 100000
-				});
-			}
-		};
-		publicMethodes.init();
+                // Check if container already exists, if true return false and do not append
 
+                if ($(el.jQWrap).height() === null ){
+                    $("body").append("<div id='"+el.holder+"'></div>");
+                    //Get values for css
+                    $("#"+el.holder).css({
+                        'max-width'      : params.holderWidth,
+                        'max-height'     : params.holderHeight,
+                        'background'     : params.background,
+                        'position'       : 'absolute',
+                        'top'            : '150px',
+                        'left' 	         : '150px',
+                        'z-index'        : 100000
+                    });
+                }
+                else {
+                    console.log('Already exists');
+                }
+            }
+		};
+
+
+        publicMethodes.init();
 		// Binding methods for each element
 		return this.children().each ( function() {
 			$(this.firstElementChild).live("click", function(){
